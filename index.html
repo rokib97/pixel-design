@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pixel Store</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@2.27.0/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .scroll-bar::-webkit-scrollbar {
+        width: 0px;
+      }
+
+      .cart-item-style {
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.349);
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- navbar starts here -->
+    <div class="navbar bg-slate-700 yellow">
+      <div class="flex-1">
+        <div class="flex text-white items-center ml-10">
+          <img src="./images/logo.png" class="w-10 md:w-20" alt="" />
+          <span class="text-xl md:text-5xl ml-2 font-bold">PIXEL STORE</span>
+        </div>
+      </div>
+      <div class="flex-none gap-2">
+        <ul class="hidden md:flex">
+          <li class="ml-10 text-2xl" onclick="navigateToHomePage()">
+            <a
+              class="text-white cursor-pointer hover:text-blue-400 duration-200 font-bold"
+              ><i class="fa-solid fa-house mr-2 text-warning"></i>Home</a
+            >
+          </li>
+
+          <li class="ml-10 text-2xl" onclick="navigateToWishListPage()">
+            <a
+              class="text-white cursor-pointer hover:text-blue-400 duration-200 font-bold"
+              ><i class="fa-solid fa-heart text-warning mr-2"></i>WishList</a
+            >
+          </li>
+
+          <li class="ml-10">
+            <a
+              class="text-white cursor-pointer hover:text-blue-400 duration-200 font-bold text-2xl"
+              ><i class="fa-solid fa-trash mr-2 text-warning"></i>Recycle Bin</a
+            >
+          </li>
+
+          <li class="mx-10 relative">
+            <label
+              for="my-drawer-4"
+              class="drawer-button text-white cursor-pointer hover:text-blue-400 duration-200 font-bold"
+              ><i
+                class="fa-solid fa-cart-shopping mr-2 text-warning text-2xl"
+              ></i>
+            </label>
+            <div class="badge badge-secondary absolute right-[-82%] top-[-45%]">
+              <span id="badge-count">0</span>
+            </div>
+          </li>
+        </ul>
+
+        <div class="dropdown dropdown-end md:hidden">
+          <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+            <i class="fa-solid fa-bars text-white font-bold"></i>
+          </label>
+          <ul
+            tabindex="0"
+            class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+          >
+            <li id="home-btn">
+              <a><i class="fa-solid fa-house"></i>Home</a>
+            </li>
+            <li>
+              <a><i class="fa-solid fa-heart"></i> WishList</a>
+            </li>
+            <li>
+              <a><i class="fa-solid fa-trash"></i> Recycle Bin</a>
+            </li>
+            <li>
+              <!-- drawer open button here -->
+              <label for="my-drawer-4" class="drawer-button"
+                ><i class="fa-solid fa-cart-shopping"></i> Cart</label
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- drawer here -->
+
+    <div class="drawer drawer-end">
+      <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
+      <div class="drawer-content scroll-bar">
+        <!-- Page content here -->
+        <h1 class="text-center font-bold text-3xl my-5">NEW ON PIXEL STORE</h1>
+
+        <!-- home page -->
+
+        <div id="home-page" style="display: block">
+          <div
+            class="max-w-[1100px] gap-4 mx-10 md:mx-auto min-h-[300px] grid md:grid-cols-3 sm:grid-cols-2"
+            id="homepage-content"
+          >
+            <!-- cards are here -->
+            <!-- <div class="card bg-base-100 shadow-2xl p-4">
+              <figure class="">
+                <img
+                  src="./images/product-placeholder.png"
+                  alt="Shoes"
+                  class="rounded-lg w-full h-[300px]"
+                />
+              </figure>
+
+              <div class="mt-[20px]">
+                <div class="flex justify-between">
+                  <h2 class="card-title">Redmi Note 11!</h2>
+                  <div class="flex text-lg">
+                    <span class="mr-4"
+                      ><i class="fa-solid fa-heart text-slate-500"></i
+                    ></span>
+                    <span
+                      ><i class="fa-solid fa-square-minus text-red-700"></i
+                    ></span>
+                  </div>
+                </div>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <h3 class="card-title">Price: $1200</h3>
+                <div class="mt-2 flex justify-between">
+                  <label
+                    for="my-modal-3"
+                    class="btn btn-outline btn-primary w-[45%] mx-auto flex justify-center items-center"
+                  >
+                    <i class="fa-solid fa-circle-info mr-2"></i> See Details
+                  </label>
+
+                  <button
+                    class="btn btn-outline btn-secondary w-[45%] mx-auto block"
+                  >
+                    <i class="fa-solid fa-bag-shopping mr-2"></i>Buy Now
+                  </button>
+                </div>
+              </div>
+            </div> -->
+            <!-- <div class="card bg-base-100 shadow-2xl p-4">
+              <figure class="">
+                <img
+                  src="./images/product-placeholder.png"
+                  alt="Shoes"
+                  class="rounded-lg w-full h-[300px]"
+                />
+              </figure>
+
+              <div class="mt-[20px]">
+                <div class="flex justify-between">
+                  <h2 class="card-title">Redmi Note 11!</h2>
+                  <div class="flex text-lg">
+                    <span class="mr-4"
+                      ><i class="fa-solid fa-heart text-slate-500"></i
+                    ></span>
+                    <span
+                      ><i class="fa-solid fa-square-minus text-red-700"></i
+                    ></span>
+                  </div>
+                </div>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <h3 class="card-title">Price: $1200</h3>
+                <div class="mt-2 flex justify-between">
+                  <label
+                    for="my-modal-3"
+                    class="btn btn-outline btn-primary w-[45%] mx-auto flex justify-center items-center"
+                  >
+                    <i class="fa-solid fa-circle-info mr-2"></i> See Details
+                  </label>
+
+                  <button
+                    class="btn btn-outline btn-secondary w-[45%] mx-auto block"
+                  >
+                    <i class="fa-solid fa-bag-shopping mr-2"></i>Buy Now
+                  </button>
+                </div>
+              </div>
+            </div> -->
+            <!-- <div class="card bg-base-100 shadow-2xl p-4">
+              <figure class="">
+                <img
+                  src="./images/product-placeholder.png"
+                  alt="Shoes"
+                  class="rounded-lg w-full h-[300px]"
+                />
+              </figure>
+
+              <div class="mt-[20px]">
+                <div class="flex justify-between">
+                  <h2 class="card-title">Redmi Note 11!</h2>
+                  <div class="flex text-lg">
+                    <span class="mr-4"
+                      ><i class="fa-solid fa-heart text-slate-500"></i
+                    ></span>
+                    <span
+                      ><i class="fa-solid fa-square-minus text-red-700"></i
+                    ></span>
+                  </div>
+                </div>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <h3 class="card-title">Price: $1200</h3>
+                <div class="mt-2 flex justify-between">
+                  <label
+                    for="my-modal-3"
+                    class="btn btn-outline btn-primary w-[45%] mx-auto flex justify-center items-center"
+                  >
+                    <i class="fa-solid fa-circle-info mr-2"></i> See Details
+                  </label>
+
+                  <button
+                    class="btn btn-outline btn-secondary w-[45%] mx-auto block"
+                  >
+                    <i class="fa-solid fa-bag-shopping mr-2"></i>Buy Now
+                  </button>
+                </div>
+              </div>
+            </div> -->
+            <!-- <div class="card bg-base-100 shadow-2xl p-4">
+              <figure class="">
+                <img
+                  src="./images/product-placeholder.png"
+                  alt="Shoes"
+                  class="rounded-lg w-full h-[300px]"
+                />
+              </figure>
+
+              <div class="mt-[20px]">
+                <div class="flex justify-between">
+                  <h2 class="card-title">Redmi Note 11!</h2>
+                  <div class="flex text-lg">
+                    <span class="mr-4"
+                      ><i class="fa-solid fa-heart text-slate-500"></i
+                    ></span>
+                    <span
+                      ><i class="fa-solid fa-square-minus text-red-700"></i
+                    ></span>
+                  </div>
+                </div>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <h3 class="card-title">Price: $1200</h3>
+                <div class="mt-2 flex justify-between">
+                  <label
+                    for="my-modal-3"
+                    class="btn btn-outline btn-primary w-[45%] mx-auto flex justify-center items-center"
+                  >
+                    <i class="fa-solid fa-circle-info mr-2"></i> See Details
+                  </label>
+
+                  <button
+                    class="btn btn-outline btn-secondary w-[45%] mx-auto block"
+                  >
+                    <i class="fa-solid fa-bag-shopping mr-2"></i>Buy Now
+                  </button>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+        <!-- wishlist page -->
+        <div style="display: none" id="wishlist-page">
+          <div
+            class="max-w-[1100px] gap-4 mx-10 md:mx-auto min-h-[300px] grid md:grid-cols-3 sm:grid-cols-2"
+          >
+            <!-- wishlist page content here -->
+            <div class="card bg-base-100 shadow-2xl p-4">
+              <figure class="">
+                <img
+                  src="https://placeimg.com/400/225/arch"
+                  alt="Shoes"
+                  class="rounded-lg w-full"
+                />
+              </figure>
+              <div class="mt-[20px]">
+                <div class="flex justify-between">
+                  <h2 class="card-title">Shoes!</h2>
+                  <div class="flex text-lg">
+                    <span class="mr-4"
+                      ><i class="fa-solid fa-heart text-red-800"></i
+                    ></span>
+                    <span
+                      ><i class="fa-solid fa-square-minus text-red-700"></i
+                    ></span>
+                  </div>
+                </div>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div class="mt-2 flex justify-between">
+                  <!-- modal open button -->
+                  <label
+                    for="my-modal-3"
+                    class="btn btn-outline btn-primary w-[45%] mx-auto flex justify-center items-center"
+                  >
+                    <i class="fa-solid fa-circle-info mr-2"></i> See Details
+                  </label>
+
+                  <button
+                    class="btn btn-outline btn-secondary w-[45%] mx-auto block"
+                  >
+                    <i class="fa-solid fa-bag-shopping mr-2"></i>Buy Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- recycle bin page -->
+        <div>
+          <div
+            class="max-w-[1100px] gap-4 mx-10 md:mx-auto min-h-[300px] grid md:grid-cols-3 sm:grid-cols-2"
+            style="display: none"
+            id="recycle-page"
+          >
+            <!-- recycle bin page content here -->
+          </div>
+        </div>
+      </div>
+      <div class="drawer-side">
+        <label for="my-drawer-4" class="drawer-overlay"></label>
+        <ul class="menu p-4 overflow-y-auto w-80 bg-base-300 text-base-content">
+          <!-- Sidebar content here -->
+          <h1 class="text-center font-semibold text-xl mb-5">CART ITEMS</h1>
+
+          <!-- cart items are here -->
+          <div>
+            <div id="cart-items-container"></div>
+
+            <!-- clear cart button -->
+            <button
+              onclick="handleClear()"
+              class="w-1/2 btn bg-red-600 border-0 hover:bg-red-700 btn-sm mx-auto block my-2"
+            >
+              CLEAR CART
+            </button>
+
+            <!-- price calculations are here -->
+            <div class="bg-slate-600 text-white shadow-lg p-4 rounded-md mt-10">
+              <p
+                class="text-yellow-400 font-semibold flex justify-between items-center"
+              >
+                <span>PRODUCT COUNT : </span>
+                <span class="text-white" id="product-count">$0</span>
+              </p>
+              <p
+                class="text-yellow-400 font-semibold flex justify-between items-center"
+              >
+                <span>PRICE : </span
+                ><span class="text-white" id="price">$0</span>
+              </p>
+              <p
+                class="text-yellow-400 font-semibold flex justify-between items-center"
+              >
+                <span>TAX : </span
+                ><span class="text-white" id="tax-count">$0</span>
+              </p>
+              <hr />
+              <p
+                class="text-yellow-400 font-semibold flex justify-between items-center"
+              >
+                <span>TOTAL PRICE : </span
+                ><span class="text-white" id="total-price">$0</span>
+              </p>
+            </div>
+          </div>
+        </ul>
+      </div>
+    </div>
+
+    <!-- details modal -->
+    <input type="checkbox" id="my-modal-3" class="modal-toggle" />
+    <div class="modal">
+      <div class="modal-box relative">
+        <label
+          for="my-modal-3"
+          class="btn btn-sm btn-circle absolute right-2 top-2"
+          >✕</label
+        >
+        <!-- all modal informations are here -->
+        <div id="modal-info">
+          <!-- modal imgage -->
+        </div>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <footer class="footer p-10 bg-neutral text-neutral-content">
+      <div>
+        <svg
+          width="50"
+          height="50"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          class="fill-current"
+        >
+          <path
+            d="M22.672 15.226l-2.432.811.841 2.515c.33 1.019-.209 2.127-1.23 2.456-1.15.325-2.148-.321-2.463-1.226l-.84-2.518-5.013 1.677.84 2.517c.391 1.203-.434 2.542-1.831 2.542-.88 0-1.601-.564-1.86-1.314l-.842-2.516-2.431.809c-1.135.328-2.145-.317-2.463-1.229-.329-1.018.211-2.127 1.231-2.456l2.432-.809-1.621-4.823-2.432.808c-1.355.384-2.558-.59-2.558-1.839 0-.817.509-1.582 1.327-1.846l2.433-.809-.842-2.515c-.33-1.02.211-2.129 1.232-2.458 1.02-.329 2.13.209 2.461 1.229l.842 2.515 5.011-1.677-.839-2.517c-.403-1.238.484-2.553 1.843-2.553.819 0 1.585.509 1.85 1.326l.841 2.517 2.431-.81c1.02-.33 2.131.211 2.461 1.229.332 1.018-.21 2.126-1.23 2.456l-2.433.809 1.622 4.823 2.433-.809c1.242-.401 2.557.484 2.557 1.838 0 .819-.51 1.583-1.328 1.847m-8.992-6.428l-5.01 1.675 1.619 4.828 5.011-1.674-1.62-4.829z"
+          ></path>
+        </svg>
+        <p>ACME Industries Ltd.<br />Providing reliable tech since 1992</p>
+      </div>
+      <div>
+        <span class="footer-title">Social</span>
+        <div class="grid grid-flow-col gap-4">
+          <a
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              class="fill-current"
+            >
+              <path
+                d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"
+              ></path></svg
+          ></a>
+          <a
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              class="fill-current"
+            >
+              <path
+                d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"
+              ></path></svg
+          ></a>
+          <a
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              class="fill-current"
+            >
+              <path
+                d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"
+              ></path></svg
+          ></a>
+        </div>
+      </div>
+    </footer>
+    <script src="./js/script.js"></script>
+  </body>
+</html>
